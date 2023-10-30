@@ -6,4 +6,5 @@ public class Evento
     public string Nome { get; set; } = string.Empty;
     public DateTime Data { get; set; }
     public string Località { get; set; } = string.Empty;
+    public List<Speaker> Speakers { get; set; } = new();    
 }

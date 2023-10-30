@@ -1,6 +1,8 @@
+using DemoBlazorServer.Data;
 using DemoBlazorServer.Services;
 using DemoCorsoBlazor.Core.GestioneEventi;
 using DemoCorsoBlazor.Core.Weather;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IGestioneEventi, ServizioEventiServer>();
 builder.Services.AddScoped<IWeatherForecast, WeatherForecastServiceOnServer>();
+builder.Services.AddDbContext<EventiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

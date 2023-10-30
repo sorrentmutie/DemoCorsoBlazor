@@ -1,0 +1,56 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "EventiContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "DemoCorsoBlazor.API",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Certifications]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CertificationSpeaker]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Eventi]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Speakers]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "(localdb)\\mssqllocaldb.databaseEventi",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

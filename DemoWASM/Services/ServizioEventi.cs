@@ -4,6 +4,16 @@ namespace DemoWASM.Services;
 
 public class ServizioEventi : IGestioneEventi
 {
+    public Task AggiungiEventoAsync(Evento evento)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task EliminaEventoAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public List<Evento> EstraiEventiFuturi()
     {
         return  new List<Evento> {
@@ -13,6 +23,11 @@ public class ServizioEventi : IGestioneEventi
         };
 
 }
+
+    public Task<List<Evento>?> EstraiEventiFuturiAsync()
+    {
+        throw new NotImplementedException();
+    }
 
     public List<Evento> EstraiEventiPassati()
     {
@@ -24,6 +39,16 @@ public class ServizioEventi : IGestioneEventi
                 new Evento { Id = 3, Località = "MIlano", Nome ="Corso ASP.NET", Data = DateTime.Today.AddDays(-14)}
                    };
         return listaEventiPassati;
+    }
+
+    public Task<Evento?> EstraiEventoPerId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task ModificaEventoAsync(Evento evento)
+    {
+        throw new NotImplementedException();
     }
 }
 

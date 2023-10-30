@@ -1,0 +1,72 @@
+﻿@page "/eventiFuturi"
+@inject IGestioneEventi servizio
+
+<button @onclick="() => AggiungiEvento()"  class="btn btn-info">Aggiungi Evento</button>
+
+@if (eventoCorrente != null)
+{
+    <Dettaglio DettaglioEvento="eventoCorrente" OnAnnulla="Annulla" OnSalva="Salva" />
+} else
+{
+    <ListaEventi Eventi="listaEventiFuturi"
+                 Titolo="Eventi Futuri"
+                 OnModifica="ModificaEventiFuturi"
+                 OnCancella="CancellaEventiFuturi">
+    </ListaEventi>
+}
+
+
+@code {
+    private Evento? eventoCorrente;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        listaEventiFuturi = await servizio.EstraiEventiFuturiAsync();
+    }
+    List<Evento>? listaEventiFuturi = new();
+
+    private async Task CancellaEventiFuturi(Evento evento)
+    {
+        // listaEventiFuturi.Remove(evento);
+        await servizio.EliminaEventoAsync(evento.Id);
+        listaEventiFuturi = await servizio.EstraiEventiFuturiAsync();
+    }
+
+    private void ModificaEventiFuturi(Evento evento)
+    {
+        eventoCorrente = evento;
+    }
+
+    private void AggiungiEvento()
+    {
+
+        eventoCorrente = new Evento
+        {
+            Data = DateTime.Now
+        };
+    }
+
+    private void Annulla()
+    {
+
+        eventoCorrente = null;
+
+    }
+
+    private async Task Salva(Evento evento)
+    {
+        if(evento.Id == 0)
+        {
+            await servizio.AggiungiEventoAsync(evento);
+        } else
+        {
+            await servizio.ModificaEventoAsync(evento);
+        }
+        eventoCorrente = null;
+        listaEventiFuturi = await servizio.EstraiEventiFuturiAsync();
+    }
+
+
+}

@@ -18,7 +18,11 @@
                 <td>@evento.Nome</td>
                 <td>@evento.Località</td>
                 <td>@evento.Data</td>
-                <td><button @onclick="() => OnCancella.InvokeAsync(evento)" class="btn btn-danger" >Cancella</button></td>
+                <td>
+                    <button @onclick="() => OnCancella.InvokeAsync(evento)" class="btn btn-danger" >Cancella</button>
+                    <button @onclick="() => OnModifica.InvokeAsync(evento)" class="btn btn-warning">Modifica</button>
+                </td>
+
             </tr>
         }
     </tbody>
@@ -31,5 +35,6 @@
     [Parameter] public EventCallback<Evento> OnCancella { get; set; }
     [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public RenderFragment? ChildContent2 { get; set; }
+    [Parameter] public EventCallback<Evento> OnModifica { get; set; }
 
 }

@@ -1,0 +1,28 @@
+﻿<h3>Dettaglio @DettaglioEvento.Nome</h3>
+
+<EditForm Model="@DettaglioEvento" OnValidSubmit="@(() => OnSalva.InvokeAsync(DettaglioEvento))">
+
+    <div class="form-group">
+        <label for="Nome">Nome</label>
+        <InputText id="Nome" class="form-control" @bind-Value="@DettaglioEvento.Nome" />
+    </div>
+
+    <div class="form-group">
+        <label for="Localita">Località</label>
+        <InputText id="Localita" class="form-control" @bind-Value="@DettaglioEvento.Località" />
+    </div>
+
+    <div class="form-group">
+        <label for="Data">Data</label>
+        <InputDate id="Data" class="form-control" @bind-Value="@DettaglioEvento.Data" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="button" @onclick="() => OnAnnulla.InvokeAsync()" class="btn btn-warning">Annulla</button>
+</EditForm>
+
+@code {
+    [Parameter] public Evento DettaglioEvento { get; set; } = new();
+    [Parameter] public EventCallback<Evento> OnSalva { get; set; }
+    [Parameter] public EventCallback OnAnnulla { get; set; }
+}
