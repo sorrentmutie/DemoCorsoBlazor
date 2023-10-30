@@ -1,5 +1,6 @@
 using DemoCorsoBlazor.Core.GestioneEventi;
-using DemoWASM;
+using DemoCorsoBlazor.Core.Weather;
+using DemoCorsoBlazor.Library;
 using DemoWASM.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -10,6 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IGestioneEventi, ServizioEventi>();
+builder.Services.AddScoped<IWeatherForecast, WeatherForecastWASMService>();
 
 
 await builder.Build().RunAsync();

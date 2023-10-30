@@ -1,13 +1,14 @@
-using DemoBlazorServer.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
+using DemoBlazorServer.Services;
+using DemoCorsoBlazor.Core.GestioneEventi;
+using DemoCorsoBlazor.Core.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<IGestioneEventi, ServizioEventiServer>();
+builder.Services.AddScoped<IWeatherForecast, WeatherForecastServiceOnServer>();
 
 var app = builder.Build();
 
