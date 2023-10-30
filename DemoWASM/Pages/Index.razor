@@ -1,0 +1,48 @@
+﻿@page "/"
+@inject IGestioneEventi servizioEventi
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<ListaEventi Titolo="Prossimi Eventi" 
+             Eventi="listaEventi"
+             OnCancella="CancellaEventiFuturi">
+
+    <ChildContent>
+        <h3>Prova</h3>
+    </ChildContent>
+
+    <ChildContent2>
+        <h3>Secondo Frammento</h3>
+    </ChildContent2>
+
+</ListaEventi>
+
+@code {
+    List<Evento> listaEventi = new();
+    protected override void OnInitialized()
+    {
+        listaEventi = servizioEventi.EstraiEventiFuturi();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+    }
+
+
+    private void CancellaEventiFuturi(Evento evento)
+    {
+       // listaEventi.Remove(evento);
+    }
+
+
+}

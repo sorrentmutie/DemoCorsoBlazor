@@ -1,0 +1,35 @@
+﻿<h3>@Titolo</h3>
+@ChildContent
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Località</th>
+            <th>Data</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var evento in Eventi)
+        {
+            <tr>
+                <td>@evento.Id</td>
+                <td>@evento.Nome</td>
+                <td>@evento.Località</td>
+                <td>@evento.Data</td>
+                <td><button @onclick="() => OnCancella.InvokeAsync(evento)" class="btn btn-danger" >Cancella</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+@ChildContent2
+
+@code {
+    [Parameter] public List<Evento> Eventi { get; set; } = new();
+    [Parameter] public string Titolo { get; set; } = "";
+    [Parameter] public EventCallback<Evento> OnCancella { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent2 { get; set; }
+
+}

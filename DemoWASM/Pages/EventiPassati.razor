@@ -1,0 +1,16 @@
+﻿@page "/eventiPassati"
+@inject IGestioneEventi servizio
+
+<ListaEventi Eventi="listaEventiPassati" 
+             Titolo="Eventi Passati" >
+</ListaEventi>
+
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        listaEventiPassati = servizio.EstraiEventiPassati();
+    }
+    List<Evento> listaEventiPassati = new();
+}
