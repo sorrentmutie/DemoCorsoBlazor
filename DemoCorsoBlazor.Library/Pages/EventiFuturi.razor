@@ -5,7 +5,17 @@
 
 @if (eventoCorrente != null)
 {
-    <Dettaglio DettaglioEvento="eventoCorrente" OnAnnulla="Annulla" OnSalva="Salva" />
+    <DettaglioGenerico TItem="Evento"
+        Item="eventoCorrente"
+        OnAnnulla="Annulla" 
+        OnSalva="Salva">
+    
+        <FormFields Context="evento">
+                <MyInputText Id="Nome" Label="Nome" @bind-Value="evento.Nome"></MyInputText>
+                <MyInputText Id="Localita" Label="Località" @bind-Value="evento.Località"></MyInputText>
+                <MyInputDate Id="Data" Label="Data" @bind-Value="evento.Data"></MyInputDate>
+        </FormFields>
+    </DettaglioGenerico>
 } else
 {
     <ListaEventi Eventi="listaEventiFuturi"

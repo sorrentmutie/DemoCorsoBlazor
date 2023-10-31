@@ -18,4 +18,22 @@ public static class EventiExtensions
 
         return listaDTO;
     }
+
+    public static Eventi ConvertiDaDTO(this EventoDTOCreate evento)
+    {
+        return new Eventi
+        {
+            Nome = evento.Nome,
+            Località = evento.Località,
+            Data = evento.Data,
+            Speakers = evento.Speakers.Select(
+              s => new Speakers
+              {
+                  Nome = s.Nome,
+                  Certifications = s.Certifications.Select(
+                   c => new Certifications { Nome = c.Nome }).ToList()
+              }).ToList()
+        };
+    }
+
 }

@@ -1,0 +1,51 @@
+﻿@page "/reqres"
+@inject IReqResData servizio
+
+<ListaUtentiReqRes Users="@users"></ListaUtentiReqRes>
+
+
+
+<DettaglioGenerico TItem="ReqResData"
+    Item="@currentUser"
+    OnSalva="Salva" OnAnnulla="Annulla">
+
+    <FormFields>
+        <MyInputText Id="Name" Label="Name" @bind-Value="currentUser.Name"></MyInputText>
+        <MyInputText Id="Job" Label="Job" @bind-Value="currentUser.Job"></MyInputText>
+    </FormFields>
+
+
+</DettaglioGenerico>
+
+
+
+
+@currentUser.Id
+@currentUser.CreatedAt
+
+@code {
+    private ReqResData currentUser = new();
+    private List<User>? users = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+            users = await servizio.GetSomeData();   
+    }
+
+
+    async Task Salva(ReqResData data)
+    {
+        var created =  await servizio.PostSomeData(data);
+        if(created != null)
+        {
+            currentUser = created;
+            currentUser.Name = "";
+            currentUser.Job = "";
+        }
+    }
+
+    void Annulla()
+    {
+
+    }   
+}

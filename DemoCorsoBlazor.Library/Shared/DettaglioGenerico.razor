@@ -1,0 +1,21 @@
+﻿@typeparam TItem where TItem: class, new()
+
+<EditForm Model="@Item" OnValidSubmit="@(() => OnSalva.InvokeAsync(Item))">
+
+    <DataAnnotationsValidator />
+    @if(FormFields != null)
+    {
+        @FormFields(Item)
+    }
+
+    <button type="submit" class="btn btn-primary">Salva</button>
+    <button type="button" @onclick="() => OnAnnulla.InvokeAsync()" class="btn btn-warning">Annulla</button>
+</EditForm>
+
+@code {
+    [Parameter] public TItem Item { get; set; } = new TItem();
+    [Parameter] public EventCallback<TItem> OnSalva { get; set; }
+    [Parameter] public EventCallback OnAnnulla { get; set; }
+    [Parameter] public RenderFragment<TItem>? FormFields { get; set; }
+}
+

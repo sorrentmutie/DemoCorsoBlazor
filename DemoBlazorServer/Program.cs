@@ -1,6 +1,7 @@
 using DemoBlazorServer.Data;
 using DemoBlazorServer.Services;
 using DemoCorsoBlazor.Core.GestioneEventi;
+using DemoCorsoBlazor.Core.ReqRes;
 using DemoCorsoBlazor.Core.Weather;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,13 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddScoped<IGestioneEventi, ServizioEventiServer>();
 builder.Services.AddScoped<IWeatherForecast, WeatherForecastServiceOnServer>();
 builder.Services.AddDbContext<EventiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IReqResData, ReqResService>();
+builder.Services.AddHttpClient("reqres", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://reqres.in/api/users");
+});
+
+builder.Services.AddScoped<HttpClient>();
 
 var app = builder.Build();
 

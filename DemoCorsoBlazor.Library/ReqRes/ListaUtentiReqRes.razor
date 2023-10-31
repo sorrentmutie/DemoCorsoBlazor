@@ -1,0 +1,11 @@
+﻿@if(Users != null)
+{
+    @foreach (var user in Users)
+    {
+       <MyCard Url="@user.avatar" Title="@($"{user.first_name} {user.last_name}")"></MyCard>
+    }
+}
+
+@code {
+    [Parameter] public List<User>? Users { get; set; }
+}

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCorsoBlazor.Library", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCorsoBlazor.Core", "DemoCorsoBlazor.Core\DemoCorsoBlazor.Core.csproj", "{83545899-8F1A-46D1-B331-8A9F5FA1417A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoCorsoBlazor.API", "DemoCorsoBlazor.API\DemoCorsoBlazor.API.csproj", "{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCorsoBlazor.API", "DemoCorsoBlazor.API\DemoCorsoBlazor.API.csproj", "{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

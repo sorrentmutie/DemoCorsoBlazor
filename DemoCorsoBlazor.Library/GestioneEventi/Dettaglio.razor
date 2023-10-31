@@ -2,9 +2,12 @@
 
 <EditForm Model="@DettaglioEvento" OnValidSubmit="@(() => OnSalva.InvokeAsync(DettaglioEvento))">
 
+    <DataAnnotationsValidator/>
+
     <div class="form-group">
         <label for="Nome">Nome</label>
         <InputText id="Nome" class="form-control" @bind-Value="@DettaglioEvento.Nome" />
+        <ValidationMessage For="@(  () => DettaglioEvento.Nome)"></ValidationMessage>
     </div>
 
     <div class="form-group">
