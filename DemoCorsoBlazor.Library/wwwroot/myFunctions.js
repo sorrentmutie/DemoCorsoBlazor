@@ -54,19 +54,21 @@ export function showMap(latitude, longitude, zoom) {
 }
 
 export function showPosizione() {
-    navigator.geolocation.getCurrentPosition(function (position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-        var zoom = 16;
-        map.setView([latitude, longitude], zoom);
-        L.marker([latitude, longitude]).addTo(map)
-            .bindPopup('You are here!')
-            .openPopup();
-    }, function (error) {
-        navigator.permissions.revoke({ name: 'geolocatoin' }).then(res => {
-            alert(resolve.state)
-        })
-        //alert(error.message);
-        
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        if (result.state === "denied") {
+            alert("E' necessario consentire la posizione");
+        }
+        else
+        {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var zoom = 16;
+                map.setView([latitude, longitude], zoom);
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup('You are here!')
+                    .openPopup();
+            });
+        };
     });
 }
