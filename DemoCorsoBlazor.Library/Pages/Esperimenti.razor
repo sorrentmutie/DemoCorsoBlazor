@@ -1,0 +1,84 @@
+﻿@page "/esperimenti"
+@inject IJSRuntime jsRuntime
+
+<h3>Esperimenti</h3>
+
+<button @onclick="() => PrimaFunzione()">Prima Funzione</button>
+<button @onclick="() => SecondaFunzione()">Seconda Funzione</button>
+<button @onclick="() => TerzaFunzione()">Terza Funzione</button>
+<button @onclick="() => QuartaFunzione()">Quarta Funzione</button>
+<button @onclick="() => Component1Interop()">Call Component 1</button>
+<button @onclick="() => ApriModale()">ApriModale</button>
+
+
+<Component1></Component1>
+<MyModal Id="myId" Title="Modale di prova"OnSave="Save">
+    <Body>
+        <p>Bla bla bla</p>
+    </Body>
+</MyModal>
+
+
+@Message
+
+@code {
+    private int Message;
+
+    private MyJavaScriptInterops? myInterop;
+    private ExampleJsInterop? exampleInterop;
+
+    private async Task ApriModale()
+    {
+        if (myInterop == null) return;
+        await myInterop.ApriModale("myId");
+    }
+
+    private async Task Save()
+    {
+        if (myInterop == null) return;
+        await myInterop.ChiudiModale();
+    }
+
+    protected override void OnInitialized()
+    {
+        myInterop = new MyJavaScriptInterops(jsRuntime);
+        exampleInterop = new ExampleJsInterop(jsRuntime);
+    }
+
+    private async Task PrimaFunzione()
+    {
+        if (myInterop == null) return;
+        await myInterop.InvocaPrimaFunzione();
+    }
+
+    private async Task SecondaFunzione()
+    {
+        if (myInterop == null) return;
+        Message = await myInterop.InvocaSecondaFunzione(5, 4);
+    }
+
+    private async Task TerzaFunzione()
+    {
+        if (myInterop == null) return;
+        await myInterop.InvocaTerzaFunzione();
+    }
+
+    private async Task QuartaFunzione()
+    {
+        if (myInterop == null) return;
+        await myInterop.InvocaQuartaFunzione("Mario");
+    }
+
+    [JSInvokable]
+    public static Task<int[]> RestituisciArray()
+    {
+        return Task.FromResult(new int[] { 1, 2, 3, 4, 5, 6, 7 });
+    }
+
+    private async Task Component1Interop()
+    {
+        if (exampleInterop == null) return;
+        await exampleInterop.Prompt("Saluti da Blazor");
+    }
+
+}
