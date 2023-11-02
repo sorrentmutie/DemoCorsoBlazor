@@ -1,6 +1,8 @@
 ﻿@page "/"
+@using DemoCorsoBlazor.Core.MyMap
 @using DemoCorsoBlazor.Library.GestioneEventi
 @inject IGestioneEventi servizioEventi
+@inject IMyMap myMap
 
 <PageTitle>Index</PageTitle>
 
@@ -22,16 +24,34 @@ Welcome to your new app.
 
 </ListaEventi>
 
+<MyMap parametri="parametri"></MyMap>
+
 @code {
     List<Evento> listaEventi = new();
+    ParametriMappa parametri = new();
     protected override void OnInitialized()
     {
+        // myInterop = new MyJavaScriptInterops(jsRuntime);
+        // await myInterop.ApriMappa();
+        parametri = myMap.EstraiParametriMappa();
         listaEventi = servizioEventi.EstraiEventiFuturi();
     }
 
-    protected override void OnAfterRender(bool firstRender)
+    [JSInvokable]
+    public static ParametriMappa[] GetMarkers()
     {
-        base.OnAfterRender(firstRender);
+        return new ParametriMappa[]{
+            new ParametriMappa(){
+                Latitudine = 45.464211,
+                Longitudine = 9.191383,
+                Description = "<h1> Pasticceria milano </h1>",
+            },
+            new ParametriMappa(){
+                Latitudine = 45.964211,
+                Longitudine = 9.291383,
+                Description = "<p> lago di como </p>",
+            }
+        };
     }
 
     protected override void OnParametersSet()

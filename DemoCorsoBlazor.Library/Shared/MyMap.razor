@@ -1,0 +1,23 @@
+﻿@using DemoCorsoBlazor.Core.MyMap;
+@inject IJSRuntime jsRuntime
+
+<button @onclick="showPosizione"> Posizione </button>
+<div id="map"></div>
+
+@code{
+    [Parameter] public ParametriMappa parametri {get; set; } = new();
+
+    private MyJavaScriptInterops? myInterop;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        myInterop = new MyJavaScriptInterops(jsRuntime);
+        await myInterop.ApriMappa(parametri.Latitudine, parametri.Longitudine, parametri.Zoom);
+    }
+
+    private async Task showPosizione()
+    {
+        if (myInterop == null) return;
+        await myInterop.ShowPosizione();
+    }
+}

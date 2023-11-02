@@ -56,6 +56,18 @@ public class MyJavaScriptInterops: IDisposable
         await module.InvokeVoidAsync("hideModal");
     }
 
+    public async Task ApriMappa(double latitude, double longitude, int zoom)
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("showMap", latitude, longitude, zoom);
+    }
+
+    public async Task ShowPosizione()
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("showPosizione");
+    }
+
     public void Dispose()
     {
         objRef?.Dispose();
