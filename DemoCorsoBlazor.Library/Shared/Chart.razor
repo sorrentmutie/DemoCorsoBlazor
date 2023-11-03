@@ -1,0 +1,18 @@
+﻿@using DemoCorsoBlazor.Library.Models;
+@inject IJSRuntime jsRuntime
+
+<div class="ct-chart" @ref="Element"></div>
+
+@code {
+    private MyChartistInterop? myChartistInterop;
+    private ElementReference Element;
+
+    [Parameter] public ChartType ChartType { get; set; }
+    [Parameter] public ChartData ChartData { get; set; } = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        myChartistInterop = new MyChartistInterop(jsRuntime);
+        await myChartistInterop.ShowChart(Element, ChartType.ToString(), ChartData);
+    }
+}

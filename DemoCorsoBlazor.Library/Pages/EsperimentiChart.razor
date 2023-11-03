@@ -1,0 +1,21 @@
+﻿@page "/chart"
+@using DemoCorsoBlazor.Library.Models;
+<h3>Esperimenti Chart</h3>
+
+<Chart ChartType="ChartType.Line" ChartData="data"></Chart>
+
+<Chart ChartType="ChartType.Bar" ChartData="data"></Chart>
+
+@code {
+    private static  string[] labels = new [] { "January", "February", "March", "April", "May", "June", "July" };
+    private ChartData data = new ChartData
+        {
+            Labels = labels.ToList(),
+            Series = new List<SeriesData>
+        {
+           new SeriesData { Data = new List<double> { 65, 59, 80, 81, 56, 55, 40 } },
+           new SeriesData { Data = new List<double> { 75, 69, 71, 83, 54, 51, 42 } },
+        }
+        };
+
+}
