@@ -2,20 +2,32 @@
 @using DemoCorsoBlazor.Library.Models;
 <h3>Esperimenti Chart</h3>
 
-<Chart ChartType="ChartType.Line" ChartData="data"></Chart>
+<Chart ChartType="ChartType.Line" Labels="@labels.ToList()">
+    <Series Values="@prezziOro"></Series>
+    <Series Values="@prezziPetrolio"></Series>
+</Chart>
 
-<Chart ChartType="ChartType.Bar" ChartData="data"></Chart>
+
+<input type="checkbox" @bind="mostraOro" /> Mostra Oro
+<Chart ChartType="ChartType.Bar" style="background-color:yellow"   Labels="@labels.ToList()">
+
+
+    @if (mostraOro)
+    {
+        <Series Values="@prezziOro"></Series>
+    }
+    <Series Values="@prezziPetrolio"></Series>
+</Chart>
+
+
 
 @code {
     private static  string[] labels = new [] { "January", "February", "March", "April", "May", "June", "July" };
-    private ChartData data = new ChartData
-        {
-            Labels = labels.ToList(),
-            Series = new List<SeriesData>
-        {
-           new SeriesData { Data = new List<double> { 65, 59, 80, 81, 56, 55, 40 } },
-           new SeriesData { Data = new List<double> { 75, 69, 71, 83, 54, 51, 42 } },
-        }
-        };
+    private static List<double> prezziOro = 
+       new List<double> { 65, 59, 80, 81, 56, 55, 40, 75, 75 };
+    private static List<double> prezziPetrolio =
+      new List<double> { 75, 69, 71, 83, 54, 51, 42 };
+    
+    private Boolean mostraOro = false;
 
 }

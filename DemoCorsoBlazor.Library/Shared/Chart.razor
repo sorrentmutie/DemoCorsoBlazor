@@ -1,7 +1,12 @@
 ﻿@using DemoCorsoBlazor.Library.Models;
 @inject IJSRuntime jsRuntime
 
-<div class="ct-chart" @ref="Element"></div>
+<div class="ct-chart" @ref="Element" @attributes="@AdditionalAttributes"></div>
+
+<CascadingValue Value="this">
+    @ChildContent
+</CascadingValue>
+
 
 @code {
     private MyChartistInterop? myChartistInterop;
@@ -9,6 +14,16 @@
 
     [Parameter] public ChartType ChartType { get; set; }
     [Parameter] public ChartData ChartData { get; set; } = new();
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public List<string> Labels { get; set; } = new();
+    [Parameter(CaptureUnmatchedValues = true)] 
+        public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+
+    protected override void OnParametersSet()
+    {
+        ChartData.Labels = Labels;
+    }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
