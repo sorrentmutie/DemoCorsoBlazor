@@ -6,6 +6,8 @@ using DemoCorsoBlazor.Library;
 using DemoWASM.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Polly;
+
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -19,6 +21,13 @@ builder.Services.AddScoped<IMyMap, ServizioMappa>();
 builder.Services.AddHttpClient("reqres", httpClient =>
 {
     httpClient.BaseAddress = new Uri("https://reqres.in/api/users");
-});
+})
+ .AddTransientHttpErrorPolicy(
+    p => p.WaitAndRetryAsync(new[]
+    {
+        TimeSpan.FromSeconds(5),
+        TimeSpan.FromSeconds(10),
+        TimeSpan.FromSeconds(20)
+    }));
 
 await builder.Build().RunAsync();
