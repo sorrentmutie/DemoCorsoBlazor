@@ -1,6 +1,7 @@
 ﻿@page "/reqres"
 @inject IReqResData servizio
 
+<button class="btn btn-danger" @onclick="() => CancellaRichiesta()">Cancella Richiesta</button>
 <ListaUtentiReqRes Users="@users"></ListaUtentiReqRes>
 
 
@@ -17,21 +18,25 @@
 
 </DettaglioGenerico>
 
-
-
-
+@Message
 @currentUser.Id
 @currentUser.CreatedAt
 
 @code {
     private ReqResData currentUser = new();
     private List<User>? users = new();
+    private string Message = "";
 
     protected override async Task OnInitializedAsync()
     {
-            users = await servizio.GetSomeData();   
+        users = await servizio.GetSomeData();   
     }
 
+    private void CancellaRichiesta()
+    {
+        servizio.CancelRequest();
+        Message = "Richiesta cancellata";
+    }
 
     async Task Salva(ReqResData data)
     {
