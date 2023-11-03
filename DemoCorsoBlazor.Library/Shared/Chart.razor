@@ -17,7 +17,7 @@
     [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public List<string> Labels { get; set; } = new();
     [Parameter(CaptureUnmatchedValues = true)] 
-        public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
+    public Dictionary<string, object> AdditionalAttributes { get; set; } = new();
 
     protected override void OnParametersSet()
     {
@@ -28,6 +28,12 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         myChartistInterop = new MyChartistInterop(jsRuntime);
-        await myChartistInterop.ShowChart(Element, ChartType.ToString(), ChartData);
+        if (firstRender == true)
+        {
+            await myChartistInterop.ShowChart(Element, ChartType.ToString(), ChartData);
+        } else
+        {
+            await myChartistInterop.UpdateChart(Element, ChartData);
+        }
     }
 }

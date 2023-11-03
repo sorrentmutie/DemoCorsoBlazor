@@ -30,3 +30,7 @@ export function createChart3(element, data, type) {
         element.chart = new Chartist.Bar(element, data);
     }
 }
+
+export function updateChart(element, data) {
+    element.chart.update(data);
+}

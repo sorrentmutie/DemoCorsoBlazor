@@ -35,4 +35,10 @@ public class MyChartistInterop
         await module.InvokeVoidAsync("createChart3", reference, data, chartType);
     }
 
+    public async Task UpdateChart(ElementReference reference,  ChartData data)
+    {
+        var module = await moduleTask.Value;
+        await module.InvokeVoidAsync("updateChart", reference, data);
+    }
+
 }
