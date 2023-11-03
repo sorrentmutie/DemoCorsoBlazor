@@ -2,5 +2,5 @@
 
 public interface IRandomUsers
 {
-    Task<Utente[]?> GetUsersAsync(int count);
+    Task<RandomUserViewModel?> GetUsersAsync(int count);
 }

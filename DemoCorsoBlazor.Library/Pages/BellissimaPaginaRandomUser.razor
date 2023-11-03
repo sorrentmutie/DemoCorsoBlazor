@@ -1,13 +1,25 @@
 ﻿@page "/randomuser"
 @inject IRandomUsers RandomUsers
 
-@if(Utenti != null)
+@if(ViewModel != null)
 {
+    <div class="row">
+        <div class="col-6">
+            <Chart Labels="ViewModel.Genere.Labels" ChartType="Models.ChartType.Bar">
+                <Series Values="ViewModel.Genere.Values"></Series>
+            </Chart>
+        </div>
 
-    
+        <div class="col-6">
+            <Chart Labels="ViewModel.TotPerNazione.Labels" ChartType="Models.ChartType.Bar">
+                <Series Values="ViewModel.TotPerNazione.Values"></Series>
+            </Chart>
+        </div>
+    </div>
+
 
     <div class="row">
-    @foreach (Utente utente in Utenti)
+    @foreach (Utente utente in ViewModel.Utenti)
     {
         <div class="col-3 mb-3">
             <MyCard Title="@($"{utente.name.first} {utente.name.last}")" Url="@utente.picture.medium" />
@@ -17,11 +29,28 @@
 }
 
 @code {
+    RandomUserViewModel ViewModel = new RandomUserViewModel();
 
-    List<Utente>? Utenti;
+    // List<Utente>? Utenti;
+    // List<string>? Labels = new List<string>{"Maschi", "Femmine"};
+    // List<string>? NationsLabels = new();
+    // List<double> Values = new();
+    // List<double> NationsValues = new();
 
     protected override async Task OnInitializedAsync()
     {
-        Utenti = (await RandomUsers.GetUsersAsync(20))?.ToList();
+        ViewModel = await RandomUsers.GetUsersAsync(23);
+        // Utenti = ViewModel.Utenti.ToList();
+
+        // Values.Add(Utenti?.Where(x => x.gender == "male").Count() ?? 0);
+        // Values.Add(Utenti?.Where(x => x.gender == "female").Count() ?? 0);
+
+        // NationsLabels = Utenti?.Select(x => x.location.country).Distinct().ToList() ?? new();
+
+        // foreach (var nazione in NationsLabels)
+        // {
+        //     NationsValues.Add(Utenti?.Where(x => x.location.country == nazione).Count() ?? 0);
+        // }
+
     }
 }

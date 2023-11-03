@@ -31,7 +31,7 @@ builder.Services.AddHttpClient("reqres", httpClient =>
         TimeSpan.FromSeconds(10),
         TimeSpan.FromSeconds(20)
     }));
-});
+
 builder.Services.AddHttpClient("httpuser", httpClient =>
 {
     httpClient.BaseAddress = new Uri("https://randomuser.me/api");
