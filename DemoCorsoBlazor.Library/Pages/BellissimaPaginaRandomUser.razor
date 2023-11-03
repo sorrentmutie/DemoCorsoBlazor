@@ -1,0 +1,27 @@
+﻿@page "/randomuser"
+@inject IRandomUsers RandomUsers
+
+@if(Utenti != null)
+{
+
+    
+
+    <div class="row">
+    @foreach (Utente utente in Utenti)
+    {
+        <div class="col-3 mb-3">
+            <MyCard Title="@($"{utente.name.first} {utente.name.last}")" Url="@utente.picture.medium" />
+        </div>
+    }
+    </div>
+}
+
+@code {
+
+    List<Utente>? Utenti;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Utenti = (await RandomUsers.GetUsersAsync(20))?.ToList();
+    }
+}

@@ -1,6 +1,7 @@
 using DemoBlazorServer.Data;
 using DemoBlazorServer.Services;
 using DemoCorsoBlazor.Core.GestioneEventi;
+using DemoCorsoBlazor.Core.RandomUser;
 using DemoCorsoBlazor.Core.ReqRes;
 using DemoCorsoBlazor.Core.Weather;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +15,14 @@ builder.Services.AddScoped<IGestioneEventi, ServizioEventiServer>();
 builder.Services.AddScoped<IWeatherForecast, WeatherForecastServiceOnServer>();
 builder.Services.AddDbContext<EventiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IReqResData, ReqResService>();
+builder.Services.AddScoped<IRandomUsers, RandomUserService>();
 builder.Services.AddHttpClient("reqres", httpClient =>
 {
     httpClient.BaseAddress = new Uri("https://reqres.in/api/users");
+});
+builder.Services.AddHttpClient("httpuser", httpClient =>
+{
+    httpClient.BaseAddress = new Uri("https://randomuser.me/api");
 });
 
 builder.Services.AddScoped<HttpClient>();
