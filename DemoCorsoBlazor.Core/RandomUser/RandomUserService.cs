@@ -1,6 +1,4 @@
-﻿using DemoCorsoBlazor.Core.ReqRes;
-using System.Net.Http.Json;
-using System.Reflection.Emit;
+﻿using System.Net.Http.Json;
 
 namespace DemoCorsoBlazor.Core.RandomUser;
 
@@ -40,15 +38,6 @@ public class RandomUserService : IRandomUsers
             {
                 vm.TotPerNazione.Values.Add(vm.Utenti?.Where(x => x.location.country == nazione).Count() ?? 0);
             }
-
-
-            //{
-            //    Labels = vm.Utenti.Select(x => x.location.country).Distinct().ToArray(),
-            //    Values = new double[] {
-            //        vm.Utenti.GroupBy(x => x.location.country).Count()
-            //    }
-            //};
-
             return vm;
         }
         else

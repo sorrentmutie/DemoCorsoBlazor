@@ -24,6 +24,7 @@ export function createChart2(element) {
 }
 
 export function createChart3(element, data, type) {
+    console.log("createChart3");
     console.log(data);
     if (type === 'Line') {
         element.chart = new Chartist.Line(element, data);

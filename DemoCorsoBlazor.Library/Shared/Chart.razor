@@ -13,7 +13,7 @@
     private ElementReference Element;
 
     [Parameter] public ChartType ChartType { get; set; }
-    [Parameter] public ChartData ChartData { get; set; } = new();
+    public ChartData ChartData { get; set; } = new();
     [Parameter] public RenderFragment? ChildContent { get; set; }
     [Parameter] public List<string> Labels { get; set; } = new();
     [Parameter(CaptureUnmatchedValues = true)] 
@@ -30,7 +30,8 @@
         myChartistInterop = new MyChartistInterop(jsRuntime);
         if (firstRender == true)
         {
-            await myChartistInterop.ShowChart(Element, ChartType.ToString(), ChartData);
+           
+                await myChartistInterop.ShowChart(Element, ChartType.ToString(), ChartData);
         } else
         {
             await myChartistInterop.UpdateChart(Element, ChartData);
