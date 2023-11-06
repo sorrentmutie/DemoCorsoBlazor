@@ -10,8 +10,6 @@
 
 <input type="checkbox" @bind="mostraOro" /> Mostra Oro
 <Chart ChartType="ChartType.Bar" style="background-color:yellow"   Labels="@labels.ToList()">
-
-
     @if (mostraOro)
     {
         <Series Values="@prezziOro"></Series>

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCorsoBlazor.Core", "Dem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoCorsoBlazor.API", "DemoCorsoBlazor.API\DemoCorsoBlazor.API.csproj", "{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoAuthBlazorServer", "DemoAuthBlazorServer\DemoAuthBlazorServer.csproj", "{B4654873-1ECA-4311-959F-E0A8727E93CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{859FDDD4-45DB-4F37-87E4-6DE6FAE0FB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4654873-1ECA-4311-959F-E0A8727E93CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4654873-1ECA-4311-959F-E0A8727E93CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4654873-1ECA-4311-959F-E0A8727E93CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4654873-1ECA-4311-959F-E0A8727E93CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

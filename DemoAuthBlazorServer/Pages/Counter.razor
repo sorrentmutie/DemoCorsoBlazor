@@ -1,0 +1,100 @@
+﻿@page "/counter"
+@using DemoAuthBlazorServer.Data;
+@using Microsoft.AspNetCore.Identity;
+@using System.Security.Claims
+@* @attribute [Authorize(Roles ="Admin")]  *@
+@attribute [Authorize(Policy = "RequireCountryAndMobilePhone")]
+
+@inject RoleManager<IdentityRole> roleManager
+@inject UserManager<MyIdentityUser> userManager
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<button class="btn btn-primary" @onclick="AddRole">Add Role</button>
+
+<button class="btn btn-primary" @onclick="AddRoleToUser">Add Role to An existing user</button>
+
+<button class="btn btn-primary" @onclick="AddClaimsToUser">Add Claims to An existing user</button>
+
+
+<AuthorizeView>
+    <Authorized>
+        <h3>Sei autorizzato, @context.User?.Identity?.Name</h3>
+        @foreach (var item in context.User?.Claims!)
+        {
+            <p>@item.Type @item.Value</p>
+        }
+
+    </Authorized>
+    <NotAuthorized>
+        <h3>Non sei autorizzato</h3>
+    </NotAuthorized>
+</AuthorizeView>
+
+@Message
+
+
+@code {
+    private int currentCount = 0;
+    private string Message = "";
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private async Task AddRole()
+    {
+        if((await roleManager.RoleExistsAsync("Admin")) == false)
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        if ((await roleManager.RoleExistsAsync("User")) == false)
+        {
+            await roleManager.CreateAsync(new IdentityRole("User"));
+        }
+
+        if ((await roleManager.RoleExistsAsync("Guest")) == false)
+        {
+            var result = await roleManager.CreateAsync(new IdentityRole("Guest"));
+        }
+    }
+
+    private async Task AddRoleToUser()
+    {
+        var user = await userManager.FindByEmailAsync("salvatoresorrentino801@gmail.com");
+        if (user != null) {
+            await userManager.AddToRoleAsync(user, "Admin");
+            await userManager.AddToRoleAsync(user, "User");
+        }
+
+        var user2 = await userManager.FindByEmailAsync("salvatore.sorrentino@live.com");
+
+        if(user2 != null)
+        {
+            await userManager.AddToRoleAsync(user2, "Admin");
+        }
+
+        Message = "Roles added";
+    }
+
+
+    private async Task AddClaimsToUser()
+    {
+        var user = await userManager.FindByEmailAsync("salvatoresorrentino801@gmail.com");
+        if (user != null)
+        {
+            var claim1 = new Claim(ClaimTypes.Country, "Italy");
+            var claim2 = new Claim(ClaimTypes.MobilePhone, "3245874568345634");
+            var claim3 = new Claim("CodiceInterno", "fhkdhfdshfshsh");
+            await userManager.AddClaimsAsync(user, new[] { claim1, claim2, claim3});
+        }
+    }
+}

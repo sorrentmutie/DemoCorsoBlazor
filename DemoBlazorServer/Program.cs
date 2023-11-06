@@ -1,6 +1,7 @@
 using DemoBlazorServer.Data;
 using DemoBlazorServer.Services;
 using DemoCorsoBlazor.Core.GestioneEventi;
+using DemoCorsoBlazor.Core.MyMap;
 using DemoCorsoBlazor.Core.RandomUser;
 using DemoCorsoBlazor.Core.ReqRes;
 using DemoCorsoBlazor.Core.Weather;
@@ -15,6 +16,8 @@ builder.Services.AddScoped<IGestioneEventi, ServizioEventiServer>();
 builder.Services.AddScoped<IWeatherForecast, WeatherForecastServiceOnServer>();
 builder.Services.AddDbContext<EventiDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IReqResData, ReqResService>();
+builder.Services.AddScoped<IMyMap, ServizioMappaServer>();
+
 builder.Services.AddScoped<IRandomUsers, RandomUserService>();
 builder.Services.AddHttpClient("reqres", httpClient =>
 {
